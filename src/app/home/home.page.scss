@@ -1,27 +1,65 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+#chartContainer.full-screen {
+  width: 100%;
+  height: 100%;
+  transition: all 2s ease-in-out;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#chartContainer.shrink {
+  width: 62.5%;
+  height: 62.5%;
+  transition: all 2s ease-in-out;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  margin-left: 1vw;
 }
 
-#container a {
-  text-decoration: none;
+ion-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  width: fit-content;
+  background: linear-gradient(to right, #eea2ff, #75cfff);
+  font-weight: bold;
+  font-size: 1.5em;
+  -webkit-text-fill-color: transparent; 
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.ticker-input {
+  --background: #f0f0f0;
+  --color: #000; /* Set text color to black */
+  --placeholder-color: #999;
+  --placeholder-font-style: italic;
+  border-radius: 8px;
+  margin: 16px;
+}
+
+ion-button {
+  --background: linear-gradient(to right, #eea2ff, #75cfff);
+  --color: #fff;
+  border-radius: 10px;
+  margin-right: 16px;
+}
+
+ion-item {
+  margin: 1vw;
+  width: fit-content;
+  --padding-start: 0;
+  --padding-end: 0;
+  --background: #f0f0f0; /* Set background color to match input */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Override cursor color */
+input {
+  caret-color: #000; /* Set caret color to black */
 }
