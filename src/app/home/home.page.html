@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item lines="none">
+  <ion-item lines="none" class="tickerSearch">
     <ion-input class="ticker-input" placeholder=" Enter Ticker" [(ngModel)]="ticker"></ion-input>
     <ion-button slot="end" (click)="fetchData()">Go</ion-button>
   </ion-item>
@@ -15,4 +15,13 @@
   <div id="chartContainer" class="full-screen">
     <canvas id="myChart"></canvas>
   </div>
+
+  <ion-card class="sma-card">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        Show 200-day SMA
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="showSMA" (ionChange)="toggleSMA()"></ion-checkbox>
+    </ion-item>
+  </ion-card>
 </ion-content>

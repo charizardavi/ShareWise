@@ -49,7 +49,7 @@ ion-button {
   margin-right: 16px;
 }
 
-ion-item {
+.tickerSearch {
   margin: 1vw;
   width: fit-content;
   --padding-start: 0;
@@ -62,4 +62,12 @@ ion-item {
 /* Override cursor color */
 input {
   caret-color: #000; /* Set caret color to black */
+}
+
+.sma-card {
+  // --background: rgba(245, 245, 245, 0.9);
+  margin: 16px;
+  border-radius: 12px;
+  // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: fit-content;
 }
