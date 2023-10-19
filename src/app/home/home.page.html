@@ -24,4 +24,21 @@
       <ion-checkbox slot="end" [(ngModel)]="showSMA" (ionChange)="toggleSMA()"></ion-checkbox>
     </ion-item>
   </ion-card>
+  <ion-card class="sma-card">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        Show 50-day EMA
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="showEMA" (ionChange)="toggleEMA()"></ion-checkbox>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="datetimes">
+    <ion-item>
+      <ion-datetime></ion-datetime>
+    </ion-item>
+    
+    
+  </ion-card>
+  
 </ion-content>

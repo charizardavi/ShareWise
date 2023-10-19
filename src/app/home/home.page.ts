@@ -18,6 +18,7 @@ export class HomePage implements AfterViewInit {
   baseUrl = 'https://financialmodelingprep.com/api/v3';
   stockChart!: Chart;
   showSMA: boolean = true;
+  showEMA: boolean = true;
 
   constructor(private http: HttpClient) {}
 
@@ -111,7 +112,36 @@ export class HomePage implements AfterViewInit {
           borderWidth: 1,
           fill: false,
           // pointHitRadius: 10,
-          pointRadius: 0
+          pointRadius: 0,
+        });
+
+        const emaData: number[] = [];
+        const N = 50;
+        const multiplier = 2 / (N + 1);
+
+        // Assume the first EMA value is the first price (or calculate the SMA of the first N prices)
+        let emaPrev = history[0].close;
+
+        for (let i = 0; i < history.length; i += nth) {
+          const price = history[i].close;
+          const ema = (price - emaPrev) * multiplier + emaPrev;
+          emaData.push(ema);
+          emaPrev = ema; // Update emaPrev for the next iteration
+        }
+        emaData.reverse();
+
+        this.stockChart.data.labels = this.stockChart.data.labels.slice(N - 1); // Adjusted to match EMA data length
+        this.stockChart.data.datasets[0].data =
+          this.stockChart.data.datasets[0].data.slice(N - 1); // Adjusted to match EMA data length
+
+        // Add EMA data to chart
+        this.stockChart.data.datasets.push({
+          label: '50-day EMA',
+          data: emaData,
+          borderColor: 'rgba(255, 159, 64, 1)', // Changed color for EMA line
+          borderWidth: 1,
+          fill: false,
+          pointRadius: 0,
         });
 
         this.stockChart.update();
@@ -119,9 +149,21 @@ export class HomePage implements AfterViewInit {
   }
 
   toggleSMA() {
-    const smaDataset = this.stockChart.data.datasets.find(dataset => dataset.label === '200-day SMA');
+    const smaDataset = this.stockChart.data.datasets.find(
+      (dataset) => dataset.label === '200-day SMA'
+    );
     if (smaDataset) {
-      smaDataset.hidden = !this.showSMA;  // Toggle the hidden property based on the checkbox value
+      smaDataset.hidden = !this.showSMA; // Toggle the hidden property based on the checkbox value
+      this.stockChart.update();
+    }
+  }
+
+  toggleEMA() {
+    const emaDataset = this.stockChart.data.datasets.find(
+      (dataset) => dataset.label === '50-day EMA'
+    );
+    if (emaDataset) {
+      emaDataset.hidden = !this.showEMA; // Toggle the hidden property based on the checkbox value
       this.stockChart.update();
     }
   }
