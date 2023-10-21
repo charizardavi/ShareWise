@@ -3,6 +3,7 @@ import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 Chart.register(...registerables);
 
@@ -19,6 +20,11 @@ export class HomePage implements AfterViewInit {
   stockChart!: Chart;
   showSMA: boolean = true;
   showEMA: boolean = true;
+  public startDateInput: string = "";
+  public endDateInput: string = "";
+
+  public startDate: string = "2022-01-02";
+  public endDate: string = "";
 
   constructor(private http: HttpClient) {}
 
@@ -58,7 +64,7 @@ export class HomePage implements AfterViewInit {
   fetchData() {
     this.http
       .get<HistoricalResponse>(
-        `${this.baseUrl}/historical-price-full/${this.ticker}?to=2023-10-02&from=2022-01-02&apikey=${this.API_KEY}`
+        `${this.baseUrl}/historical-price-full/${this.ticker}?to=2023-10-02&from=${this.startDate}&apikey=${this.API_KEY}`
       )
       .subscribe((res) => {
         const history = res.historical;
@@ -166,6 +172,13 @@ export class HomePage implements AfterViewInit {
       emaDataset.hidden = !this.showEMA; // Toggle the hidden property based on the checkbox value
       this.stockChart.update();
     }
+  }
+
+  startChanged(){
+    console.log(this.startDateInput);
+    // this.startDate = this.startDateInput.slice(0,4)+"-"+this.startDateInput.slice(5,7)+"-"+this.startDateInput.slice(8,10);
+    // this.fetchData()
+    // console.log(this.startDate);
   }
 }
 interface HistoricalResponse {

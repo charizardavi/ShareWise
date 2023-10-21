@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <img slot="start" class="toolbar_logo" src="assets/icon/favicon.png" alt="">
+    <ion-title slot="start" style="width: fit-content;">
       <h1 class="gradient-text">ShareWise</h1>
     </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -33,12 +35,8 @@
     </ion-item>
   </ion-card>
 
-  <ion-card class="datetimes">
-    <ion-item>
-      <ion-datetime></ion-datetime>
-    </ion-item>
-    
-    
-  </ion-card>
-  
+  <ion-datetime [(ngModel)]="startDateInput" (ionChange)="startChanged()" value="2022-01-02" presentation="date"></ion-datetime>
+  <ion-datetime></ion-datetime>
+
+
 </ion-content>
